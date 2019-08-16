@@ -1,3 +1,6 @@
+# Hello
+#
+#
 
 # ██████╗ ██╗███████╗██╗  ██╗ 
 # ██╔══██╗██║██╔════╝██║ ██╔╝
@@ -22,6 +25,11 @@
 # ██║██║ ╚═╝ ██║██║     ╚██████╔╝██║  ██║   ██║   ███████║
 # ╚═╝╚═╝     ╚═╝╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
 
+
+from random import randint
+from warnings import warn
+
+# local
 from risk_constants import MAP_DICT
 
 class Map():
@@ -54,6 +62,76 @@ class Region():
         self.name = name
         self.MAP_DICT = MAP_DICT
 
+
+
+
+def assertNotGhostArmy(amount):
+    """ funny named function to warn user an illegal number of dice is
+        being used for the battle rolls"""
+    if amount <= 0:
+        warn("someone tries to fight with a nonexisting army!")
+    else:
+        pass
+    
+def battle(attacker_dice_amount, defender_dice_amount):
+    """ takes two amounts for the amount of dice to use and
+        returns the victor
+        arguments"""
+
+    
+    amount_of_checks = min(attacker_dice_amount, defender_dice_amount)
+    assertNotGhostArmy(amount_of_checks)
+    
+    attacks = [randint(1,6) for i in range(attacker_dice_amount)]
+    defences = [randint(1,6) for i in range(defender_dice_amount)]
+
+    print(35*"-")
+    print("attacker rolls:",attacks)
+    print("defender rolls:",defences)
+
+    lost_attacker_soldiers = 0
+    lost_defender_soldiers = 0
+
+    for i in range(amount_of_checks):
+        
+        best_attack = popMax(attacks)
+        best_defence = popMax(defences)
+        
+        attacker_wins = decide_result(best_attack, best_defence)
+
+        
+        if attacker_wins:
+            print("attacker wins with", best_attack, 'vs', best_defence)
+            lost_defender_soldiers += 1
+        else:
+            print("attacker loses with", best_attack, 'vs', best_defence)
+            lost_attacker_soldiers += 1
+
+    print("BATTLE RESULT")
+    print('attacker lost:',lost_attacker_soldiers,
+          '| defender lost:',lost_defender_soldiers)
+    
+    return lost_attacker_soldiers, lost_defender_soldiers
+
+def decide_result(attack, defence):
+    if defence >= attack:
+        return False
+    else:
+        return True
+        
+    
+def popMax(l):
+    """
+        arguments
+        l = a list of integers
+
+        returns
+        the maximum number from a list and removes it from that list"""
+
+    
+    max_num = max(l)
+    index_max_num = l.index(max_num)
+    return l.pop(index_max_num)
 
 
 
@@ -135,11 +213,31 @@ def printMap():
 
 
 
+def Test_Battle():
+    battle(1, 1)
+    battle(0, 0)
+    battle(0, 10)
+    battle(10, 0)
+    battle(3, 2)
+    battle(2, 3)
+    
 def Test_Stuff():
     # Test Map
     printMap()
 
-#  =--
+    # Test Battle
+    Test_Battle()
+
+
+
+# ██╗  ██╗
+# ██║  ██║
+# ███████║
+# ██╔══██║
+# ██║  ██║
+# ╚═╝  ╚═╝
+
+
 
 GAMETITLE="""
         ///////////////////////////\\
