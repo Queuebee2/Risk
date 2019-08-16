@@ -1,50 +1,54 @@
 
 # Risk will be here
 
-
-Continents = {"Noord-Amerika":["Alaska","Quebec"],
-              "Zuid-Amerika":["Brazilië","Peru"]}
+from risk_constants import MAP_DICT
 
 class Map():
     """ """
     def __init__(self):
         self.name = "RISK"
-        self.continents = list()
+        self.continents = []
         self.create_continents()
 
-
     def create_continents(self):
-        for continent_name, regions in Continents.items():
-            continent = Continent(continent_name, regions)
+        for continent_name, regions_dict in MAP_DICT.items():
+            continent = Continent(continent_name, regions_dict)
             self.continents.append(continent)
-
 
 class Continent():
     """ """
-    def __init__(self, name, regions):
+    def __init__(self, name, regions_dict):
         self.name = name
         self.regions = list()
-        self.create_regions(regions)
+        self.create_regions(regions_dict)
 
-    def create_regions(self, regions):
-        for region_name in regions:
-            region = Region(region_name)
+    def create_regions(self, regions_dict):
+        for region_name, MAP_DICT in regions_dict.items():
+            region = Region(region_name, MAP_DICT)
             self.regions.append(region)
-
-
+        
 class Region():
     """ """
-    def __init__(self, name):
+    def __init__(self, name, MAP_DICT):
         self.name = name
+        self.MAP_DICT = MAP_DICT
 
 
 # test the classes
 def printMap():
+    
     mapobj = Map()
     for continent in mapobj.continents:
         print(continent.name)
         for region in continent.regions:
-            print("  ",region.name)
+            print("   ",region.name)
+            for neighbour in region.MAP_DICT:
+                print("      ",neighbour)
+                
+        print('\n',continent.name,'done')
+        print(30*'-')
+
+
 
 
 printMap()
