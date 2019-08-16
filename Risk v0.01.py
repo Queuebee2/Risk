@@ -55,6 +55,15 @@ class Region():
         self.MAP_DICT = MAP_DICT
 
 
+
+
+#  ██████╗  █████╗ ███╗   ███╗███████╗    ██╗      ██████╗  ██████╗ ██████╗ 
+# ██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██║     ██╔═══██╗██╔═══██╗██╔══██╗
+# ██║  ███╗███████║██╔████╔██║█████╗      ██║     ██║   ██║██║   ██║██████╔╝
+# ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║     ██║   ██║██║   ██║██╔═══╝ 
+# ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ███████╗╚██████╔╝╚██████╔╝██║     
+#  ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝    ╚══════╝ ╚═════╝  ╚═════╝ ╚═╝  
+
 def gameLoop():
 
     # startwaarden
@@ -74,7 +83,30 @@ def gameLoop():
     for player in range(player_amt):
         print("GAME NOT IMPLEMENTED")
 
+    # game 'opstellen'
+    """ De onderdelen van de kaart worden geïnitialiseerd,
+        - [x] continenten laden
+        - [x] landen laden
+        De land-kaarten worden verdeeld over de spelers en er word
+        alvast automatisch op ieder land een bataljon bijhorend tot
+        de eigenaar geplaatst.
 
+        [!] De beginnende speler wordt random bepaalt"""
+
+    # versterken
+    """ Het aantal bataljons van de speler die aan zet is wordt als volgt
+        bepaald:
+        - regio_bataljons = player.owned_regions.count() / 3 = N bataljons (minimaal 3)
+        - contintent_bataljons = sum([c[bataljonwaarde] for c in player.owned_continents])
+    """
+    # aanvalbeurt
+    """ Hoe word gecheckt welke speler door welke speler 
+        
+    """
+    # verzetten
+
+
+#
 
 
 
